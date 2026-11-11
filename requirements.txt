@@ -1,0 +1,11 @@
+# Python 3.10-3.11 recommended. Java 8/11/17 is needed for PySpark 3.5 (see README).
+pyspark==3.5.3
+pandas==3.1.1
+numpy==2.4.6
+scikit-learn==1.9.1
+plotly==7.1.0
+matplotlib==3.11.2
+streamlit==1.67.0
+pyarrow==26.0.1
+requests==2.34.2
+pytest==9.2.0

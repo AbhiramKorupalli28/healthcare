@@ -1,0 +1,2593 @@
+{
+  "dataset": {
+    "file": "kaggle_hospital_dataset.csv",
+    "size_bytes": 203785672,
+    "size_mb": 203.79,
+    "fingerprint": "8e839726a1bfd952",
+    "storage": "LOCAL",
+    "source": "dataset\\kaggle_hospital_dataset.csv"
+  },
+  "before": {
+    "rows": 942319,
+    "columns": 40,
+    "missing_cells": 2809121,
+    "missing_by_column": {
+      "patient_id": 0,
+      "visit_id": 0,
+      "age": 0,
+      "gender": 0,
+      "blood_type": 0,
+      "marital_status": 0,
+      "visit_type": 0,
+      "visit_status": 0,
+      "bill_amount": 0,
+      "billing_status": 0,
+      "insurance_company": 258069,
+      "insurance_plan": 258069,
+      "primary_diagnosis": 459067,
+      "diagnosis_count": 459067,
+      "treatment_type": 458283,
+      "treatment_status": 458283,
+      "treatment_count": 458283,
+      "diabetes": 0,
+      "hypertension": 0,
+      "heart_disease": 0,
+      "heart_attack": 0,
+      "stroke": 0,
+      "asthma": 0,
+      "kidney_disease": 0,
+      "copd": 0,
+      "cancer": 0,
+      "high_cholesterol": 0,
+      "bmi": 0,
+      "bp_systolic": 0,
+      "bp_diastolic": 0,
+      "glucose": 0,
+      "cholesterol": 0,
+      "heart_rate": 0,
+      "sleep_hours": 0,
+      "physical_health_days": 0,
+      "mental_health_days": 0,
+      "general_health": 0,
+      "physically_active": 0,
+      "smoking_status": 0,
+      "risk_label": 0
+    },
+    "duplicate_rows": 540
+  },
+  "after": {
+    "rows": 941779,
+    "columns": 43,
+    "missing_cells": 2808161,
+    "missing_by_column": {
+      "patient_id": 0,
+      "visit_id": 0,
+      "age": 0,
+      "gender": 0,
+      "blood_type": 0,
+      "marital_status": 0,
+      "visit_type": 0,
+      "visit_status": 0,
+      "bill_amount": 0,
+      "billing_status": 0,
+      "insurance_company": 257917,
+      "insurance_plan": 257917,
+      "primary_diagnosis": 458916,
+      "diagnosis_count": 458916,
+      "treatment_type": 458165,
+      "treatment_status": 458165,
+      "treatment_count": 458165,
+      "diabetes": 0,
+      "hypertension": 0,
+      "heart_disease": 0,
+      "heart_attack": 0,
+      "stroke": 0,
+      "asthma": 0,
+      "kidney_disease": 0,
+      "copd": 0,
+      "cancer": 0,
+      "high_cholesterol": 0,
+      "bmi": 0,
+      "bp_systolic": 0,
+      "bp_diastolic": 0,
+      "glucose": 0,
+      "cholesterol": 0,
+      "heart_rate": 0,
+      "sleep_hours": 0,
+      "physical_health_days": 0,
+      "mental_health_days": 0,
+      "general_health": 0,
+      "physically_active": 0,
+      "smoking_status": 0,
+      "risk_label": 0,
+      "age_group": 0,
+      "bmi_category": 0,
+      "bp_category": 0
+    },
+    "duplicate_rows": 0
+  },
+  "duplicates_removed": 540,
+  "rejected_rows": 0,
+  "invalid_breakdown": {},
+  "consistency_warnings_kept": {},
+  "cleaned_rows": 941779,
+  "roles_detected": {
+    "patient_id": "patient_id",
+    "age": "age",
+    "gender": "gender",
+    "bmi": "bmi",
+    "glucose": "glucose",
+    "bp_systolic": "bp_systolic",
+    "bp_diastolic": "bp_diastolic",
+    "cholesterol": "cholesterol",
+    "heart_rate": "heart_rate",
+    "sleep_hours": "sleep_hours",
+    "physical_health_days": "physical_health_days",
+    "mental_health_days": "mental_health_days",
+    "general_health": "general_health",
+    "physically_active": "physically_active",
+    "smoking_status": "smoking_status",
+    "risk_label": "risk_label",
+    "diabetes": "diabetes",
+    "hypertension": "hypertension",
+    "high_cholesterol": "high_cholesterol",
+    "heart_disease": "heart_disease",
+    "heart_attack": "heart_attack",
+    "stroke": "stroke",
+    "asthma": "asthma",
+    "kidney_disease": "kidney_disease",
+    "copd": "copd",
+    "cancer": "cancer"
+  },
+  "codebook_changes": {
+    "renamed": [],
+    "labelled": [],
+    "scaled": [],
+    "special": []
+  },
+  "timings_s": {
+    "read_csv_s": 9.32,
+    "profile_before_s": 13.53,
+    "clean_s": 22.52,
+    "write_parquet_s": 8.62,
+    "profile_after_s": 10.81
+  },
+  "cleaning_total_s": 64.95,
+  "spark": {
+    "version": "3.5.3",
+    "master": "local[*]",
+    "app_name": "HealthcareAnalytics",
+    "app_id": "local-1794400302601",
+    "default_parallelism": 12,
+    "driver_memory": "3g",
+    "shuffle_partitions": "8"
+  },
+  "sql": {
+    "1_total_records": {
+      "title": "Total patient records",
+      "seconds": 1.352,
+      "rows": [
+        {
+          "total_patient_records": 941779
+        }
+      ]
+    },
+    "2_disease_counts": {
+      "title": "Disease-wise patient count",
+      "seconds": 5.733,
+      "rows": [
+        {
+          "condition": "diabetes",
+          "positive": 0,
+          "known": 0
+        },
+        {
+          "condition": "hypertension",
+          "positive": 0,
+          "known": 0
+        },
+        {
+          "condition": "high_cholesterol",
+          "positive": 0,
+          "known": 0
+        },
+        {
+          "condition": "heart_disease",
+          "positive": 0,
+          "known": 0
+        },
+        {
+          "condition": "heart_attack",
+          "positive": 0,
+          "known": 0
+        },
+        {
+          "condition": "stroke",
+          "positive": 0,
+          "known": 0
+        },
+        {
+          "condition": "asthma",
+          "positive": 0,
+          "known": 0
+        },
+        {
+          "condition": "kidney_disease",
+          "positive": 0,
+          "known": 0
+        },
+        {
+          "condition": "copd",
+          "positive": 0,
+          "known": 0
+        },
+        {
+          "condition": "cancer",
+          "positive": 0,
+          "known": 0
+        }
+      ]
+    },
+    "3_age_group_distribution": {
+      "title": "Age-group disease distribution",
+      "seconds": 4.392,
+      "rows": [
+        {
+          "age_group": "18-29",
+          "patients": 360542,
+          "diabetes_pct": "0.00",
+          "hypertension_pct": "0.00",
+          "high_cholesterol_pct": "0.00",
+          "heart_disease_pct": "0.00",
+          "heart_attack_pct": "0.00",
+          "stroke_pct": "0.00",
+          "asthma_pct": "0.00",
+          "kidney_disease_pct": "0.00",
+          "copd_pct": "0.00",
+          "cancer_pct": "0.00"
+        },
+        {
+          "age_group": "30-39",
+          "patients": 120252,
+          "diabetes_pct": "0.00",
+          "hypertension_pct": "0.00",
+          "high_cholesterol_pct": "0.00",
+          "heart_disease_pct": "0.00",
+          "heart_attack_pct": "0.00",
+          "stroke_pct": "0.00",
+          "asthma_pct": "0.00",
+          "kidney_disease_pct": "0.00",
+          "copd_pct": "0.00",
+          "cancer_pct": "0.00"
+        },
+        {
+          "age_group": "40-49",
+          "patients": 121247,
+          "diabetes_pct": "0.00",
+          "hypertension_pct": "0.00",
+          "high_cholesterol_pct": "0.00",
+          "heart_disease_pct": "0.00",
+          "heart_attack_pct": "0.00",
+          "stroke_pct": "0.00",
+          "asthma_pct": "0.00",
+          "kidney_disease_pct": "0.00",
+          "copd_pct": "0.00",
+          "cancer_pct": "0.00"
+        },
+        {
+          "age_group": "50-59",
+          "patients": 120988,
+          "diabetes_pct": "0.00",
+          "hypertension_pct": "0.00",
+          "high_cholesterol_pct": "0.00",
+          "heart_disease_pct": "0.00",
+          "heart_attack_pct": "0.00",
+          "stroke_pct": "0.00",
+          "asthma_pct": "0.00",
+          "kidney_disease_pct": "0.00",
+          "copd_pct": "0.00",
+          "cancer_pct": "0.00"
+        },
+        {
+          "age_group": "60-69",
+          "patients": 119226,
+          "diabetes_pct": "0.00",
+          "hypertension_pct": "0.00",
+          "high_cholesterol_pct": "0.00",
+          "heart_disease_pct": "0.00",
+          "heart_attack_pct": "0.00",
+          "stroke_pct": "0.00",
+          "asthma_pct": "0.00",
+          "kidney_disease_pct": "0.00",
+          "copd_pct": "0.00",
+          "cancer_pct": "0.00"
+        },
+        {
+          "age_group": "70+",
+          "patients": 99524,
+          "diabetes_pct": "0.00",
+          "hypertension_pct": "0.00",
+          "high_cholesterol_pct": "0.00",
+          "heart_disease_pct": "0.00",
+          "heart_attack_pct": "0.00",
+          "stroke_pct": "0.00",
+          "asthma_pct": "0.00",
+          "kidney_disease_pct": "0.00",
+          "copd_pct": "0.00",
+          "cancer_pct": "0.00"
+        }
+      ]
+    },
+    "4_gender_distribution": {
+      "title": "Gender-wise disease distribution",
+      "seconds": 2.88,
+      "rows": [
+        {
+          "gender": "Female",
+          "patients": 315810,
+          "diabetes_pct": "0.00",
+          "hypertension_pct": "0.00",
+          "high_cholesterol_pct": "0.00",
+          "heart_disease_pct": "0.00",
+          "heart_attack_pct": "0.00",
+          "stroke_pct": "0.00",
+          "asthma_pct": "0.00",
+          "kidney_disease_pct": "0.00",
+          "copd_pct": "0.00",
+          "cancer_pct": "0.00"
+        },
+        {
+          "gender": "Male",
+          "patients": 313534,
+          "diabetes_pct": "0.00",
+          "hypertension_pct": "0.00",
+          "high_cholesterol_pct": "0.00",
+          "heart_disease_pct": "0.00",
+          "heart_attack_pct": "0.00",
+          "stroke_pct": "0.00",
+          "asthma_pct": "0.00",
+          "kidney_disease_pct": "0.00",
+          "copd_pct": "0.00",
+          "cancer_pct": "0.00"
+        },
+        {
+          "gender": "Other",
+          "patients": 312435,
+          "diabetes_pct": "0.00",
+          "hypertension_pct": "0.00",
+          "high_cholesterol_pct": "0.00",
+          "heart_disease_pct": "0.00",
+          "heart_attack_pct": "0.00",
+          "stroke_pct": "0.00",
+          "asthma_pct": "0.00",
+          "kidney_disease_pct": "0.00",
+          "copd_pct": "0.00",
+          "cancer_pct": "0.00"
+        }
+      ]
+    },
+    "5_avg_bmi_by_disease": {
+      "title": "Average BMI by disease",
+      "seconds": 5.866,
+      "rows": [
+        {
+          "condition": "diabetes",
+          "status": 1,
+          "patients": 80082,
+          "avg_bmi": 35.23
+        },
+        {
+          "condition": "diabetes",
+          "status": 0,
+          "patients": 861697,
+          "avg_bmi": 29.47
+        },
+        {
+          "condition": "hypertension",
+          "status": 1,
+          "patients": 79497,
+          "avg_bmi": 33.32
+        },
+        {
+          "condition": "hypertension",
+          "status": 0,
+          "patients": 862282,
+          "avg_bmi": 29.65
+        },
+        {
+          "condition": "high_cholesterol",
+          "status": 1,
+          "patients": 115079,
+          "avg_bmi": 34.38
+        },
+        {
+          "condition": "high_cholesterol",
+          "status": 0,
+          "patients": 826700,
+          "avg_bmi": 29.35
+        },
+        {
+          "condition": "heart_disease",
+          "status": 1,
+          "patients": 79497,
+          "avg_bmi": 33.32
+        },
+        {
+          "condition": "heart_disease",
+          "status": 0,
+          "patients": 862282,
+          "avg_bmi": 29.65
+        },
+        {
+          "condition": "heart_attack",
+          "status": 0,
+          "patients": 941779,
+          "avg_bmi": 29.96
+        },
+        {
+          "condition": "stroke",
+          "status": 1,
+          "patients": 78755,
+          "avg_bmi": 30.67
+        },
+        {
+          "condition": "stroke",
+          "status": 0,
+          "patients": 863024,
+          "avg_bmi": 29.9
+        },
+        {
+          "condition": "asthma",
+          "status": 1,
+          "patients": 41248,
+          "avg_bmi": 30.65
+        },
+        {
+          "condition": "asthma",
+          "status": 0,
+          "patients": 900531,
+          "avg_bmi": 29.93
+        },
+        {
+          "condition": "kidney_disease",
+          "status": 1,
+          "patients": 41356,
+          "avg_bmi": 30.63
+        },
+        {
+          "condition": "kidney_disease",
+          "status": 0,
+          "patients": 900423,
+          "avg_bmi": 29.93
+        },
+        {
+          "condition": "copd",
+          "status": 1,
+          "patients": 17730,
+          "avg_bmi": 32.25
+        },
+        {
+          "condition": "copd",
+          "status": 0,
+          "patients": 924049,
+          "avg_bmi": 29.92
+        },
+        {
+          "condition": "cancer",
+          "status": 1,
+          "patients": 41658,
+          "avg_bmi": 30.64
+        },
+        {
+          "condition": "cancer",
+          "status": 0,
+          "patients": 900121,
+          "avg_bmi": 29.93
+        }
+      ]
+    },
+    "6_avg_glucose_by_disease": {
+      "title": "Average glucose by disease",
+      "seconds": 5.053,
+      "rows": [
+        {
+          "condition": "diabetes",
+          "status": 1,
+          "patients": 80082,
+          "avg_glucose": 165.62
+        },
+        {
+          "condition": "diabetes",
+          "status": 0,
+          "patients": 861697,
+          "avg_glucose": 97.9
+        },
+        {
+          "condition": "hypertension",
+          "status": 1,
+          "patients": 79497,
+          "avg_glucose": 108.7
+        },
+        {
+          "condition": "hypertension",
+          "status": 0,
+          "patients": 862282,
+          "avg_glucose": 103.19
+        },
+        {
+          "condition": "high_cholesterol",
+          "status": 1,
+          "patients": 115079,
+          "avg_glucose": 144.95
+        },
+        {
+          "condition": "high_cholesterol",
+          "status": 0,
+          "patients": 826700,
+          "avg_glucose": 97.91
+        },
+        {
+          "condition": "heart_disease",
+          "status": 1,
+          "patients": 79497,
+          "avg_glucose": 108.7
+        },
+        {
+          "condition": "heart_disease",
+          "status": 0,
+          "patients": 862282,
+          "avg_glucose": 103.19
+        },
+        {
+          "condition": "heart_attack",
+          "status": 0,
+          "patients": 941779,
+          "avg_glucose": 103.66
+        },
+        {
+          "condition": "stroke",
+          "status": 1,
+          "patients": 78755,
+          "avg_glucose": 108.83
+        },
+        {
+          "condition": "stroke",
+          "status": 0,
+          "patients": 863024,
+          "avg_glucose": 103.19
+        },
+        {
+          "condition": "asthma",
+          "status": 1,
+          "patients": 41248,
+          "avg_glucose": 108.68
+        },
+        {
+          "condition": "asthma",
+          "status": 0,
+          "patients": 900531,
+          "avg_glucose": 103.43
+        },
+        {
+          "condition": "kidney_disease",
+          "status": 1,
+          "patients": 41356,
+          "avg_glucose": 108.59
+        },
+        {
+          "condition": "kidney_disease",
+          "status": 0,
+          "patients": 900423,
+          "avg_glucose": 103.43
+        },
+        {
+          "condition": "copd",
+          "status": 1,
+          "patients": 17730,
+          "avg_glucose": 111.58
+        },
+        {
+          "condition": "copd",
+          "status": 0,
+          "patients": 924049,
+          "avg_glucose": 103.51
+        },
+        {
+          "condition": "cancer",
+          "status": 1,
+          "patients": 41658,
+          "avg_glucose": 108.86
+        },
+        {
+          "condition": "cancer",
+          "status": 0,
+          "patients": 900121,
+          "avg_glucose": 103.42
+        }
+      ]
+    },
+    "7_blood_pressure": {
+      "title": "Blood pressure classes (AHA 2017)",
+      "seconds": 1.439,
+      "rows": [
+        {
+          "bp_category": "Stage 1 hypertension",
+          "patients": 376630,
+          "avg_systolic": 133.5,
+          "avg_diastolic": 80.8
+        },
+        {
+          "bp_category": "Stage 2 hypertension",
+          "patients": 339719,
+          "avg_systolic": 150.1,
+          "avg_diastolic": 86.1
+        },
+        {
+          "bp_category": "Elevated",
+          "patients": 220008,
+          "avg_systolic": 127.2,
+          "avg_diastolic": 77.8
+        },
+        {
+          "bp_category": "Normal",
+          "patients": 5422,
+          "avg_systolic": 117.2,
+          "avg_diastolic": 75.5
+        }
+      ]
+    },
+    "8_missing_values": {
+      "title": "Missing-value analysis per column",
+      "seconds": 2.645,
+      "rows": [
+        {
+          "column_name": "patient_id",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "visit_id",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "age",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "gender",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "blood_type",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "marital_status",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "visit_type",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "visit_status",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "bill_amount",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "billing_status",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "insurance_company",
+          "missing": 257917,
+          "total": 941779,
+          "missing_pct": 27.39
+        },
+        {
+          "column_name": "insurance_plan",
+          "missing": 257917,
+          "total": 941779,
+          "missing_pct": 27.39
+        },
+        {
+          "column_name": "primary_diagnosis",
+          "missing": 458916,
+          "total": 941779,
+          "missing_pct": 48.73
+        },
+        {
+          "column_name": "diagnosis_count",
+          "missing": 458916,
+          "total": 941779,
+          "missing_pct": 48.73
+        },
+        {
+          "column_name": "treatment_type",
+          "missing": 458165,
+          "total": 941779,
+          "missing_pct": 48.65
+        },
+        {
+          "column_name": "treatment_status",
+          "missing": 458165,
+          "total": 941779,
+          "missing_pct": 48.65
+        },
+        {
+          "column_name": "treatment_count",
+          "missing": 458165,
+          "total": 941779,
+          "missing_pct": 48.65
+        },
+        {
+          "column_name": "diabetes",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "hypertension",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "heart_disease",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "heart_attack",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "stroke",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "asthma",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "kidney_disease",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "copd",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "cancer",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "high_cholesterol",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "bmi",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "bp_systolic",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "bp_diastolic",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "glucose",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "cholesterol",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "heart_rate",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "sleep_hours",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "physical_health_days",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "mental_health_days",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "general_health",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "physically_active",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "smoking_status",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "risk_label",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "age_group",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "bmi_category",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        },
+        {
+          "column_name": "bp_category",
+          "missing": 0,
+          "total": 941779,
+          "missing_pct": 0.0
+        }
+      ]
+    },
+    "9_risk_category": {
+      "title": "Risk-category distribution",
+      "seconds": 1.68,
+      "rows": [
+        {
+          "risk_category": "Low Risk",
+          "patients": 558477,
+          "pct_of_records": "59.30"
+        },
+        {
+          "risk_category": "Moderate Risk",
+          "patients": 218910,
+          "pct_of_records": "23.24"
+        },
+        {
+          "risk_category": "High Risk",
+          "patients": 164392,
+          "pct_of_records": "17.46"
+        }
+      ]
+    }
+  },
+  "ml": {
+    "risk_label": {
+      "labels": [
+        "High Risk",
+        "Low Risk",
+        "Moderate Risk"
+      ],
+      "majority_baseline_accuracy": 0.5933,
+      "sample_rows": 50000,
+      "rows_used": 50000,
+      "train_rows": 40000,
+      "test_rows": 10000,
+      "class_counts": {
+        "Low Risk": 29668,
+        "Moderate Risk": 11634,
+        "High Risk": 8698
+      },
+      "features_numeric": [
+        "age",
+        "bmi",
+        "physical_health_days",
+        "mental_health_days",
+        "physically_active",
+        "sleep_hours",
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "stroke",
+        "asthma",
+        "kidney_disease",
+        "copd",
+        "cancer"
+      ],
+      "features_categorical": [
+        "gender",
+        "general_health",
+        "smoking_status"
+      ],
+      "seconds": 5.71,
+      "models": {
+        "Decision Tree": {
+          "metrics": {
+            "accuracy": 1.0,
+            "precision_weighted": 1.0,
+            "recall_weighted": 1.0,
+            "f1_weighted": 1.0,
+            "precision_macro": 1.0,
+            "recall_macro": 1.0,
+            "f1_macro": 1.0
+          },
+          "confusion_matrix": [
+            [
+              1740,
+              0,
+              0
+            ],
+            [
+              0,
+              5933,
+              0
+            ],
+            [
+              0,
+              0,
+              2327
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "general_health",
+              "importance": 0.9999999999989984
+            },
+            {
+              "feature": "mental_health_days",
+              "importance": 1.0016432128147646e-12
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.0
+            },
+            {
+              "feature": "age",
+              "importance": 0.0
+            },
+            {
+              "feature": "physically_active",
+              "importance": 0.0
+            },
+            {
+              "feature": "physical_health_days",
+              "importance": 0.0
+            },
+            {
+              "feature": "diabetes",
+              "importance": 0.0
+            },
+            {
+              "feature": "hypertension",
+              "importance": 0.0
+            },
+            {
+              "feature": "high_cholesterol",
+              "importance": 0.0
+            },
+            {
+              "feature": "sleep_hours",
+              "importance": 0.0
+            }
+          ],
+          "fit_seconds": 0.71
+        },
+        "Random Forest": {
+          "metrics": {
+            "accuracy": 1.0,
+            "precision_weighted": 1.0,
+            "recall_weighted": 1.0,
+            "f1_weighted": 1.0,
+            "precision_macro": 1.0,
+            "recall_macro": 1.0,
+            "f1_macro": 1.0
+          },
+          "confusion_matrix": [
+            [
+              1740,
+              0,
+              0
+            ],
+            [
+              0,
+              5933,
+              0
+            ],
+            [
+              0,
+              0,
+              2327
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "general_health",
+              "importance": 0.6697942991423151
+            },
+            {
+              "feature": "physical_health_days",
+              "importance": 0.1395680676604176
+            },
+            {
+              "feature": "age",
+              "importance": 0.048798267020432634
+            },
+            {
+              "feature": "stroke",
+              "importance": 0.047510950724288896
+            },
+            {
+              "feature": "heart_disease",
+              "importance": 0.029603419126654217
+            },
+            {
+              "feature": "hypertension",
+              "importance": 0.02754187375000933
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.011632590421593718
+            },
+            {
+              "feature": "high_cholesterol",
+              "importance": 0.007708009009889891
+            },
+            {
+              "feature": "diabetes",
+              "importance": 0.005048738609616362
+            },
+            {
+              "feature": "asthma",
+              "importance": 0.003286387633633837
+            }
+          ],
+          "fit_seconds": 2.81
+        }
+      }
+    },
+    "diabetes": {
+      "labels": [
+        "No",
+        "Yes"
+      ],
+      "majority_baseline_accuracy": 0.9161,
+      "sample_rows": 50000,
+      "rows_used": 50000,
+      "train_rows": 40000,
+      "test_rows": 10000,
+      "class_counts": {
+        "No": 45805,
+        "Yes": 4195
+      },
+      "features_numeric": [
+        "age",
+        "bmi",
+        "physical_health_days",
+        "mental_health_days",
+        "physically_active",
+        "sleep_hours",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "stroke",
+        "asthma",
+        "kidney_disease",
+        "copd",
+        "cancer"
+      ],
+      "features_categorical": [
+        "gender",
+        "general_health",
+        "smoking_status"
+      ],
+      "seconds": 3.71,
+      "models": {
+        "Decision Tree": {
+          "metrics": {
+            "accuracy": 0.9838,
+            "precision_weighted": 0.9864,
+            "recall_weighted": 0.9838,
+            "f1_weighted": 0.9844,
+            "precision_macro": 0.9194,
+            "recall_macro": 0.9906,
+            "f1_macro": 0.9515,
+            "precision_positive": 0.8388,
+            "recall_positive": 0.9988,
+            "f1_positive": 0.9119
+          },
+          "confusion_matrix": [
+            [
+              9000,
+              161
+            ],
+            [
+              1,
+              838
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "high_cholesterol",
+              "importance": 0.9460218376872254
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.03375961177937897
+            },
+            {
+              "feature": "hypertension",
+              "importance": 0.012573524918386052
+            },
+            {
+              "feature": "age",
+              "importance": 0.007645025615009618
+            },
+            {
+              "feature": "physical_health_days",
+              "importance": 0.0
+            },
+            {
+              "feature": "physically_active",
+              "importance": 0.0
+            },
+            {
+              "feature": "mental_health_days",
+              "importance": 0.0
+            },
+            {
+              "feature": "sleep_hours",
+              "importance": 0.0
+            },
+            {
+              "feature": "heart_disease",
+              "importance": 0.0
+            },
+            {
+              "feature": "stroke",
+              "importance": 0.0
+            }
+          ],
+          "fit_seconds": 0.45
+        },
+        "Random Forest": {
+          "metrics": {
+            "accuracy": 0.9924,
+            "precision_weighted": 0.9927,
+            "recall_weighted": 0.9924,
+            "f1_weighted": 0.9925,
+            "precision_macro": 0.9647,
+            "recall_macro": 0.9877,
+            "f1_macro": 0.9759,
+            "precision_positive": 0.9311,
+            "recall_positive": 0.9821,
+            "f1_positive": 0.9559
+          },
+          "confusion_matrix": [
+            [
+              9100,
+              61
+            ],
+            [
+              15,
+              824
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "high_cholesterol",
+              "importance": 0.43199661535970496
+            },
+            {
+              "feature": "physical_health_days",
+              "importance": 0.224968802121276
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.14443172221742664
+            },
+            {
+              "feature": "general_health",
+              "importance": 0.1311338650702742
+            },
+            {
+              "feature": "age",
+              "importance": 0.02024120983551294
+            },
+            {
+              "feature": "heart_disease",
+              "importance": 0.008759938879807605
+            },
+            {
+              "feature": "hypertension",
+              "importance": 0.007823736501585937
+            },
+            {
+              "feature": "kidney_disease",
+              "importance": 0.006799753582203478
+            },
+            {
+              "feature": "cancer",
+              "importance": 0.006041643942248541
+            },
+            {
+              "feature": "asthma",
+              "importance": 0.004413253008997635
+            }
+          ],
+          "fit_seconds": 1.73
+        }
+      }
+    },
+    "heart_disease": {
+      "labels": [
+        "No",
+        "Yes"
+      ],
+      "majority_baseline_accuracy": 0.9168,
+      "sample_rows": 50000,
+      "rows_used": 50000,
+      "train_rows": 40000,
+      "test_rows": 10000,
+      "class_counts": {
+        "No": 45841,
+        "Yes": 4159
+      },
+      "features_numeric": [
+        "age",
+        "bmi",
+        "physical_health_days",
+        "mental_health_days",
+        "physically_active",
+        "sleep_hours",
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "stroke",
+        "asthma",
+        "kidney_disease",
+        "copd",
+        "cancer"
+      ],
+      "features_categorical": [
+        "gender",
+        "general_health",
+        "smoking_status"
+      ],
+      "seconds": 3.62,
+      "models": {
+        "Decision Tree": {
+          "metrics": {
+            "accuracy": 1.0,
+            "precision_weighted": 1.0,
+            "recall_weighted": 1.0,
+            "f1_weighted": 1.0,
+            "precision_macro": 1.0,
+            "recall_macro": 1.0,
+            "f1_macro": 1.0,
+            "precision_positive": 1.0,
+            "recall_positive": 1.0,
+            "f1_positive": 1.0
+          },
+          "confusion_matrix": [
+            [
+              9168,
+              0
+            ],
+            [
+              0,
+              832
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "hypertension",
+              "importance": 1.0
+            },
+            {
+              "feature": "age",
+              "importance": 0.0
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.0
+            },
+            {
+              "feature": "mental_health_days",
+              "importance": 0.0
+            },
+            {
+              "feature": "physical_health_days",
+              "importance": 0.0
+            },
+            {
+              "feature": "physically_active",
+              "importance": 0.0
+            },
+            {
+              "feature": "sleep_hours",
+              "importance": 0.0
+            },
+            {
+              "feature": "diabetes",
+              "importance": 0.0
+            },
+            {
+              "feature": "high_cholesterol",
+              "importance": 0.0
+            },
+            {
+              "feature": "stroke",
+              "importance": 0.0
+            }
+          ],
+          "fit_seconds": 0.45
+        },
+        "Random Forest": {
+          "metrics": {
+            "accuracy": 1.0,
+            "precision_weighted": 1.0,
+            "recall_weighted": 1.0,
+            "f1_weighted": 1.0,
+            "precision_macro": 1.0,
+            "recall_macro": 1.0,
+            "f1_macro": 1.0,
+            "precision_positive": 1.0,
+            "recall_positive": 1.0,
+            "f1_positive": 1.0
+          },
+          "confusion_matrix": [
+            [
+              9168,
+              0
+            ],
+            [
+              0,
+              832
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "hypertension",
+              "importance": 0.3727622651168057
+            },
+            {
+              "feature": "physical_health_days",
+              "importance": 0.27922322198807875
+            },
+            {
+              "feature": "general_health",
+              "importance": 0.25249744179734773
+            },
+            {
+              "feature": "high_cholesterol",
+              "importance": 0.04398282789405671
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.028245738785734366
+            },
+            {
+              "feature": "physically_active",
+              "importance": 0.00794527218677343
+            },
+            {
+              "feature": "stroke",
+              "importance": 0.004647052071037737
+            },
+            {
+              "feature": "diabetes",
+              "importance": 0.003185809344586629
+            },
+            {
+              "feature": "age",
+              "importance": 0.0021953674801512796
+            },
+            {
+              "feature": "kidney_disease",
+              "importance": 0.0012206924492740125
+            }
+          ],
+          "fit_seconds": 1.63
+        }
+      }
+    },
+    "hypertension": {
+      "labels": [
+        "No",
+        "Yes"
+      ],
+      "majority_baseline_accuracy": 0.9168,
+      "sample_rows": 50000,
+      "rows_used": 50000,
+      "train_rows": 40000,
+      "test_rows": 10000,
+      "class_counts": {
+        "No": 45841,
+        "Yes": 4159
+      },
+      "features_numeric": [
+        "age",
+        "bmi",
+        "physical_health_days",
+        "mental_health_days",
+        "physically_active",
+        "sleep_hours",
+        "diabetes",
+        "high_cholesterol",
+        "heart_disease",
+        "stroke",
+        "asthma",
+        "kidney_disease",
+        "copd",
+        "cancer"
+      ],
+      "features_categorical": [
+        "gender",
+        "general_health",
+        "smoking_status"
+      ],
+      "seconds": 3.51,
+      "models": {
+        "Decision Tree": {
+          "metrics": {
+            "accuracy": 1.0,
+            "precision_weighted": 1.0,
+            "recall_weighted": 1.0,
+            "f1_weighted": 1.0,
+            "precision_macro": 1.0,
+            "recall_macro": 1.0,
+            "f1_macro": 1.0,
+            "precision_positive": 1.0,
+            "recall_positive": 1.0,
+            "f1_positive": 1.0
+          },
+          "confusion_matrix": [
+            [
+              9168,
+              0
+            ],
+            [
+              0,
+              832
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "heart_disease",
+              "importance": 1.0
+            },
+            {
+              "feature": "age",
+              "importance": 0.0
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.0
+            },
+            {
+              "feature": "mental_health_days",
+              "importance": 0.0
+            },
+            {
+              "feature": "physical_health_days",
+              "importance": 0.0
+            },
+            {
+              "feature": "physically_active",
+              "importance": 0.0
+            },
+            {
+              "feature": "sleep_hours",
+              "importance": 0.0
+            },
+            {
+              "feature": "diabetes",
+              "importance": 0.0
+            },
+            {
+              "feature": "high_cholesterol",
+              "importance": 0.0
+            },
+            {
+              "feature": "stroke",
+              "importance": 0.0
+            }
+          ],
+          "fit_seconds": 0.38
+        },
+        "Random Forest": {
+          "metrics": {
+            "accuracy": 1.0,
+            "precision_weighted": 1.0,
+            "recall_weighted": 1.0,
+            "f1_weighted": 1.0,
+            "precision_macro": 1.0,
+            "recall_macro": 1.0,
+            "f1_macro": 1.0,
+            "precision_positive": 1.0,
+            "recall_positive": 1.0,
+            "f1_positive": 1.0
+          },
+          "confusion_matrix": [
+            [
+              9168,
+              0
+            ],
+            [
+              0,
+              832
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "heart_disease",
+              "importance": 0.37730899305343085
+            },
+            {
+              "feature": "general_health",
+              "importance": 0.2701983578249208
+            },
+            {
+              "feature": "physical_health_days",
+              "importance": 0.26032002493427775
+            },
+            {
+              "feature": "high_cholesterol",
+              "importance": 0.043960322331404296
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.026532037092013155
+            },
+            {
+              "feature": "physically_active",
+              "importance": 0.007251413485855788
+            },
+            {
+              "feature": "stroke",
+              "importance": 0.004522057809702969
+            },
+            {
+              "feature": "diabetes",
+              "importance": 0.0028747278836588224
+            },
+            {
+              "feature": "age",
+              "importance": 0.002240904598151753
+            },
+            {
+              "feature": "kidney_disease",
+              "importance": 0.0010857442415261708
+            }
+          ],
+          "fit_seconds": 1.62
+        }
+      }
+    },
+    "high_cholesterol": {
+      "labels": [
+        "No",
+        "Yes"
+      ],
+      "majority_baseline_accuracy": 0.8792,
+      "sample_rows": 50000,
+      "rows_used": 50000,
+      "train_rows": 40000,
+      "test_rows": 10000,
+      "class_counts": {
+        "No": 43958,
+        "Yes": 6042
+      },
+      "features_numeric": [
+        "age",
+        "bmi",
+        "physical_health_days",
+        "mental_health_days",
+        "physically_active",
+        "sleep_hours",
+        "diabetes",
+        "hypertension",
+        "heart_disease",
+        "stroke",
+        "asthma",
+        "kidney_disease",
+        "copd",
+        "cancer"
+      ],
+      "features_categorical": [
+        "gender",
+        "general_health",
+        "smoking_status"
+      ],
+      "seconds": 3.63,
+      "models": {
+        "Decision Tree": {
+          "metrics": {
+            "accuracy": 0.9689,
+            "precision_weighted": 0.975,
+            "recall_weighted": 0.9689,
+            "f1_weighted": 0.9704,
+            "precision_macro": 0.8982,
+            "recall_macro": 0.9809,
+            "f1_macro": 0.9338,
+            "precision_positive": 0.7968,
+            "recall_positive": 0.9967,
+            "f1_positive": 0.8856
+          },
+          "confusion_matrix": [
+            [
+              8485,
+              307
+            ],
+            [
+              4,
+              1204
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "physical_health_days",
+              "importance": 0.7153404678636546
+            },
+            {
+              "feature": "hypertension",
+              "importance": 0.1729410674075763
+            },
+            {
+              "feature": "diabetes",
+              "importance": 0.11135708340469341
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.00020685525508191925
+            },
+            {
+              "feature": "sleep_hours",
+              "importance": 8.042371002924475e-05
+            },
+            {
+              "feature": "age",
+              "importance": 7.41023589644854e-05
+            },
+            {
+              "feature": "smoking_status",
+              "importance": 4.555627624692241e-18
+            },
+            {
+              "feature": "physically_active",
+              "importance": 0.0
+            },
+            {
+              "feature": "mental_health_days",
+              "importance": 0.0
+            },
+            {
+              "feature": "heart_disease",
+              "importance": 0.0
+            }
+          ],
+          "fit_seconds": 0.35
+        },
+        "Random Forest": {
+          "metrics": {
+            "accuracy": 0.9667,
+            "precision_weighted": 0.9701,
+            "recall_weighted": 0.9667,
+            "f1_weighted": 0.9677,
+            "precision_macro": 0.9022,
+            "recall_macro": 0.9557,
+            "f1_macro": 0.9266,
+            "precision_positive": 0.8127,
+            "recall_positive": 0.9412,
+            "f1_positive": 0.8723
+          },
+          "confusion_matrix": [
+            [
+              8530,
+              262
+            ],
+            [
+              71,
+              1137
+            ]
+          ],
+          "importance_top10": [
+            {
+              "feature": "physical_health_days",
+              "importance": 0.28611744180559867
+            },
+            {
+              "feature": "diabetes",
+              "importance": 0.25358177446375635
+            },
+            {
+              "feature": "general_health",
+              "importance": 0.1549447333172026
+            },
+            {
+              "feature": "bmi",
+              "importance": 0.11378498299722663
+            },
+            {
+              "feature": "heart_disease",
+              "importance": 0.06349646169687084
+            },
+            {
+              "feature": "hypertension",
+              "importance": 0.060102594422958774
+            },
+            {
+              "feature": "age",
+              "importance": 0.03134521783442971
+            },
+            {
+              "feature": "cancer",
+              "importance": 0.006432030035199727
+            },
+            {
+              "feature": "kidney_disease",
+              "importance": 0.0061930087206662175
+            },
+            {
+              "feature": "stroke",
+              "importance": 0.005865076165141383
+            }
+          ],
+          "fit_seconds": 1.64
+        }
+      }
+    }
+  },
+  "kmeans": {
+    "k": 3,
+    "features": [
+      "age",
+      "bmi",
+      "glucose",
+      "bp_systolic",
+      "bp_diastolic",
+      "cholesterol",
+      "heart_rate",
+      "sleep_hours",
+      "physical_health_days",
+      "mental_health_days"
+    ],
+    "rows_used": 50000,
+    "silhouette": 0.2696,
+    "profile": [
+      {
+        "cluster": 0,
+        "patients": 24005,
+        "age": 26.35,
+        "bmi": 27.82,
+        "glucose": 94.82,
+        "bp_systolic": 130.18,
+        "bp_diastolic": 79.16,
+        "cholesterol": 189.47,
+        "heart_rate": 77.53,
+        "sleep_hours": 7.0,
+        "physical_health_days": 2.79,
+        "mental_health_days": 2.3
+      },
+      {
+        "cluster": 1,
+        "patients": 5664,
+        "age": 41.46,
+        "bmi": 33.65,
+        "glucose": 123.07,
+        "bp_systolic": 161.62,
+        "bp_diastolic": 91.37,
+        "cholesterol": 227.66,
+        "heart_rate": 77.7,
+        "sleep_hours": 7.0,
+        "physical_health_days": 20.36,
+        "mental_health_days": 2.42
+      },
+      {
+        "cluster": 2,
+        "patients": 20331,
+        "age": 57.92,
+        "bmi": 31.43,
+        "glucose": 108.41,
+        "bp_systolic": 140.36,
+        "bp_diastolic": 82.72,
+        "cholesterol": 208.24,
+        "heart_rate": 77.81,
+        "sleep_hours": 7.01,
+        "physical_health_days": 2.94,
+        "mental_health_days": 2.5
+      }
+    ]
+  },
+  "overview_diseases": [
+    {
+      "condition": "high_cholesterol",
+      "positive": 115079,
+      "known": 941779,
+      "prevalence_pct": 12.22
+    },
+    {
+      "condition": "diabetes",
+      "positive": 80082,
+      "known": 941779,
+      "prevalence_pct": 8.5
+    },
+    {
+      "condition": "hypertension",
+      "positive": 79497,
+      "known": 941779,
+      "prevalence_pct": 8.44
+    },
+    {
+      "condition": "heart_disease",
+      "positive": 79497,
+      "known": 941779,
+      "prevalence_pct": 8.44
+    },
+    {
+      "condition": "stroke",
+      "positive": 78755,
+      "known": 941779,
+      "prevalence_pct": 8.36
+    },
+    {
+      "condition": "cancer",
+      "positive": 41658,
+      "known": 941779,
+      "prevalence_pct": 4.42
+    },
+    {
+      "condition": "kidney_disease",
+      "positive": 41356,
+      "known": 941779,
+      "prevalence_pct": 4.39
+    },
+    {
+      "condition": "asthma",
+      "positive": 41248,
+      "known": 941779,
+      "prevalence_pct": 4.38
+    },
+    {
+      "condition": "copd",
+      "positive": 17730,
+      "known": 941779,
+      "prevalence_pct": 1.88
+    },
+    {
+      "condition": "heart_attack",
+      "positive": 0,
+      "known": 941779,
+      "prevalence_pct": 0.0
+    }
+  ],
+  "overview_age_groups": [
+    {
+      "age_group": "18-29",
+      "count": 360542
+    },
+    {
+      "age_group": "40-49",
+      "count": 121247
+    },
+    {
+      "age_group": "50-59",
+      "count": 120988
+    },
+    {
+      "age_group": "30-39",
+      "count": 120252
+    },
+    {
+      "age_group": "60-69",
+      "count": 119226
+    },
+    {
+      "age_group": "70+",
+      "count": 99524
+    }
+  ],
+  "risk_distribution": [
+    {
+      "risk_label": "Low Risk",
+      "count": 558477
+    },
+    {
+      "risk_label": "Moderate Risk",
+      "count": 218910
+    },
+    {
+      "risk_label": "High Risk",
+      "count": 164392
+    }
+  ],
+  "disease_by_age": {
+    "diabetes": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 30718,
+        "positive_pct": 8.52
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 10306,
+        "positive_pct": 8.57
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 10202,
+        "positive_pct": 8.41
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 10217,
+        "positive_pct": 8.44
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 10106,
+        "positive_pct": 8.48
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 8533,
+        "positive_pct": 8.57
+      }
+    ],
+    "hypertension": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 30536,
+        "positive_pct": 8.47
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 10181,
+        "positive_pct": 8.47
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 10163,
+        "positive_pct": 8.38
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 10130,
+        "positive_pct": 8.37
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 10021,
+        "positive_pct": 8.41
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 8466,
+        "positive_pct": 8.51
+      }
+    ],
+    "high_cholesterol": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 44191,
+        "positive_pct": 12.26
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 14778,
+        "positive_pct": 12.29
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 14624,
+        "positive_pct": 12.06
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 14651,
+        "positive_pct": 12.11
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 14543,
+        "positive_pct": 12.2
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 12292,
+        "positive_pct": 12.35
+      }
+    ],
+    "heart_disease": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 30536,
+        "positive_pct": 8.47
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 10181,
+        "positive_pct": 8.47
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 10163,
+        "positive_pct": 8.38
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 10130,
+        "positive_pct": 8.37
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 10021,
+        "positive_pct": 8.41
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 8466,
+        "positive_pct": 8.51
+      }
+    ],
+    "heart_attack": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 0,
+        "positive_pct": 0.0
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 0,
+        "positive_pct": 0.0
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 0,
+        "positive_pct": 0.0
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 0,
+        "positive_pct": 0.0
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 0,
+        "positive_pct": 0.0
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 0,
+        "positive_pct": 0.0
+      }
+    ],
+    "stroke": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 29979,
+        "positive_pct": 8.31
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 9980,
+        "positive_pct": 8.3
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 10173,
+        "positive_pct": 8.39
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 10206,
+        "positive_pct": 8.44
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 10037,
+        "positive_pct": 8.42
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 8380,
+        "positive_pct": 8.42
+      }
+    ],
+    "asthma": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 15535,
+        "positive_pct": 4.31
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 5364,
+        "positive_pct": 4.46
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 5353,
+        "positive_pct": 4.41
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 5219,
+        "positive_pct": 4.31
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 5299,
+        "positive_pct": 4.44
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 4478,
+        "positive_pct": 4.5
+      }
+    ],
+    "kidney_disease": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 15828,
+        "positive_pct": 4.39
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 5253,
+        "positive_pct": 4.37
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 5266,
+        "positive_pct": 4.34
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 5403,
+        "positive_pct": 4.47
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 5271,
+        "positive_pct": 4.42
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 4335,
+        "positive_pct": 4.36
+      }
+    ],
+    "copd": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 0,
+        "positive_pct": 0.0
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 0,
+        "positive_pct": 0.0
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 2734,
+        "positive_pct": 2.25
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 5219,
+        "positive_pct": 4.31
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 5299,
+        "positive_pct": 4.44
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 4478,
+        "positive_pct": 4.5
+      }
+    ],
+    "cancer": [
+      {
+        "age_group": "18-29",
+        "patients": 360542,
+        "positive": 16057,
+        "positive_pct": 4.45
+      },
+      {
+        "age_group": "30-39",
+        "patients": 120252,
+        "positive": 5433,
+        "positive_pct": 4.52
+      },
+      {
+        "age_group": "40-49",
+        "patients": 121247,
+        "positive": 5339,
+        "positive_pct": 4.4
+      },
+      {
+        "age_group": "50-59",
+        "patients": 120988,
+        "positive": 5289,
+        "positive_pct": 4.37
+      },
+      {
+        "age_group": "60-69",
+        "patients": 119226,
+        "positive": 5189,
+        "positive_pct": 4.35
+      },
+      {
+        "age_group": "70+",
+        "patients": 99524,
+        "positive": 4351,
+        "positive_pct": 4.37
+      }
+    ]
+  },
+  "disease_by_gender": {
+    "diabetes": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 26768,
+        "positive_pct": 8.48
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 26690,
+        "positive_pct": 8.51
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 26624,
+        "positive_pct": 8.52
+      }
+    ],
+    "hypertension": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 26803,
+        "positive_pct": 8.49
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 26397,
+        "positive_pct": 8.42
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 26297,
+        "positive_pct": 8.42
+      }
+    ],
+    "high_cholesterol": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 38700,
+        "positive_pct": 12.25
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 38275,
+        "positive_pct": 12.21
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 38104,
+        "positive_pct": 12.2
+      }
+    ],
+    "heart_disease": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 26803,
+        "positive_pct": 8.49
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 26397,
+        "positive_pct": 8.42
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 26297,
+        "positive_pct": 8.42
+      }
+    ],
+    "heart_attack": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 0,
+        "positive_pct": 0.0
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 0,
+        "positive_pct": 0.0
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 0,
+        "positive_pct": 0.0
+      }
+    ],
+    "stroke": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 26396,
+        "positive_pct": 8.36
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 26187,
+        "positive_pct": 8.35
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 26172,
+        "positive_pct": 8.38
+      }
+    ],
+    "asthma": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 13992,
+        "positive_pct": 4.43
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 13452,
+        "positive_pct": 4.29
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 13804,
+        "positive_pct": 4.42
+      }
+    ],
+    "kidney_disease": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 14023,
+        "positive_pct": 4.44
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 13639,
+        "positive_pct": 4.35
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 13694,
+        "positive_pct": 4.38
+      }
+    ],
+    "copd": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 5994,
+        "positive_pct": 1.9
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 5744,
+        "positive_pct": 1.83
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 5992,
+        "positive_pct": 1.92
+      }
+    ],
+    "cancer": [
+      {
+        "gender": "Female",
+        "patients": 315810,
+        "positive": 14107,
+        "positive_pct": 4.47
+      },
+      {
+        "gender": "Male",
+        "patients": 313534,
+        "positive": 13881,
+        "positive_pct": 4.43
+      },
+      {
+        "gender": "Other",
+        "patients": 312435,
+        "positive": 13670,
+        "positive_pct": 4.38
+      }
+    ]
+  },
+  "clinical_summary": [
+    {
+      "measure": "bmi",
+      "count": 941779,
+      "mean": 29.963,
+      "std": 3.345,
+      "min": 23.4,
+      "max": 44.9
+    },
+    {
+      "measure": "glucose",
+      "count": 941779,
+      "mean": 103.659,
+      "std": 21.462,
+      "min": 88.0,
+      "max": 204.0
+    },
+    {
+      "measure": "bp_systolic",
+      "count": 941779,
+      "mean": 137.898,
+      "std": 12.545,
+      "min": 115.0,
+      "max": 198.0
+    },
+    {
+      "measure": "bp_diastolic",
+      "count": 941779,
+      "mean": 82.013,
+      "std": 5.221,
+      "min": 72.0,
+      "max": 109.0
+    },
+    {
+      "measure": "cholesterol",
+      "count": 941779,
+      "mean": 201.447,
+      "std": 18.036,
+      "min": 177.0,
+      "max": 280.0
+    }
+  ],
+  "total_seconds": 144.5
+}

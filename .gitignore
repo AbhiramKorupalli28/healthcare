@@ -1,0 +1,37 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Big Data raw and intermediate datasets (>100MB blocked by GitHub)
+dataset/*.csv
+dataset/kaggle_raw/
+dataset/uploads/
+dataset/hdfs_local_fallback/
+dataset/_temp_kaggle_joined/
+
+# Spark / Hadoop runtime outputs
+output/cleaned/
+output/logs/
+metastore_db/
+derby.log
+*.parquet
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
