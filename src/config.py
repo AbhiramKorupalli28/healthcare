@@ -139,9 +139,10 @@ VALID_RANGES = {
     "sleep_hours": (1, 24),
 }
 
-# Theme (dark navy, royal violet and blue accents)
+# Theme (Modern Light SaaS with Forest Green accent, matching user specification)
 THEME = {
-    "bg": "#0A1128", "panel": "#121B3A", "panel2": "#1A2650", "text": "#E6E9F5",
-    "muted": "#9AA4C7", "violet": "#7C3AED", "blue": "#3B82F6", "lilac": "#B794F6",
-    "green": "#34D399", "amber": "#FBBF24", "red": "#F87171",
+    "bg": "#F8FAFC", "panel": "#FFFFFF", "panel2": "#F1F5F9", "text": "#111827",
+    "muted": "#6B7280", "forest_green": "#0E4D2A", "green": "#10B981", "light_green": "#EBF5EE",
+    "border": "#E5E7EB", "blue": "#2563EB", "amber": "#D97706", "red": "#DC2626",
+    "violet": "#0E4D2A", "lilac": "#059669",
 }
