@@ -34,10 +34,10 @@ Healthcare-BigData/
 ├── docs/       # Project methodology and screenshot assets
 │   ├── methodology.md
 │   └── screenshots/
-│       ├── dashboard_overview.png
-│       ├── disease_analytics.png
-│       ├── evaluation_results.png
-│       └── spark_processing.png
+│       ├── dashboard_overview_light.png
+│       ├── disease_analytics_light.png
+│       ├── evaluation_results_light.png
+│       └── spark_processing_light.png
 ├── reports/    # Final project report and documentation
 │   └── final_report.md
 ├── results/    # Spark SQL analytical outputs and query results
@@ -110,19 +110,19 @@ Healthcare-BigData/
 ## Screenshots
 
 ### Interactive Dashboard Overview
-![Dashboard Overview](docs/screenshots/dashboard_overview.png)  
+![Dashboard Overview](docs/screenshots/dashboard_overview_light.png)  
 *Overview page displaying 1.6M+ validated patient records, disease distribution, and risk cohorts in the new light theme.*
 
 ### Disease Analytics
-![Disease Analytics](docs/screenshots/disease_analytics.png)  
+![Disease Analytics](docs/screenshots/disease_analytics_light.png)  
 *Prevalence analysis and slice-and-dice filtering across gender, age groups, and chronic conditions (white SaaS theme).*
 
 ### Model Evaluation Results
-![Evaluation Results](docs/screenshots/evaluation_results.png)  
+![Evaluation Results](docs/screenshots/evaluation_results_light.png)  
 *Performance comparison between Random Forest and Decision Tree classifiers (light theme).*
 
 ### Big Data & Spark Processing
-![Spark Processing](docs/screenshots/spark_processing.png)  
+![Spark Processing](docs/screenshots/spark_processing_light.png)  
 *PySpark cleaning telemetry, execution timings, and HDFS cluster storage status (white theme).*
 
 ## How to Run the Project
