@@ -1,275 +1,172 @@
-# Healthcare Analytics for Disease Pattern Detection
+# Healthcare Big Data Analytics Using Hadoop and Apache Spark
 
-[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
-[![Apache Spark](https://img.shields.io/badge/Apache%20Spark-3.5.3-E25A1C.svg)](https://spark.apache.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.67.0-FF4B4B.svg)](https://streamlit.io/)
-[![Hadoop](https://img.shields.io/badge/Hadoop%20HDFS-3.3.6-66CCFF.svg)](https://hadoop.apache.org/)
-[![GitHub](https://img.shields.io/badge/GitHub-healthcare-181717.svg)](https://github.com/AbhiramKorupalli28/healthcare.git)
+This project uses large-scale healthcare data to study chronic disease prevalence, patient risk factors, and hospital admission patterns across populations. We used Apache Hadoop and Apache Spark (PySpark, Spark SQL) to clean, join, and analyze multi-gigabyte healthcare records, and trained Decision Tree and Random Forest classifiers alongside an interactive Streamlit web dashboard.
 
-A Big Data analytics project built for a B.Tech Big Data Analytics mini case study (roll A23126552281). It processes large-scale clinical and epidemiological healthcare data with **Apache Spark (PySpark, Spark SQL)**, stores data in **Hadoop HDFS**, trains **scikit-learn** models, and presents the results in an interactive **Streamlit** dashboard.
+## Dataset
+We used the **Health Care Data Set (20 Tables)** from Kaggle, integrated into a unified clinical master dataset, alongside the **CDC BRFSS population survey**.
+- **Dataset source:** [https://www.kaggle.com/datasets/moid1234/health-care-data-set-20-tables](https://www.kaggle.com/datasets/moid1234/health-care-data-set-20-tables)
+- **Secondary survey source:** [https://www.cdc.gov/brfss/annual_data/annual_data.htm](https://www.cdc.gov/brfss/annual_data/annual_data.htm)
+- **Extracted master dataset:** `dataset/kaggle_hospital_master_1_6m.csv` (1,602,174 rows, 32 columns, ~405 MB CSV, >1.5 GB in-memory Spark partitions)
+- **Integrated clinical tables:** 
+  - `STG_EHP__PATN` (351,765 Patients: DOB, Age, Gender, Blood Type, Marital Status)
+  - `STG_EHP__VIST` (917,331 Admissions: Admission/Discharge Timestamps, Length of Stay, Visit Type)
+  - `STG_EHP__DIAG_1` & `2` (1,602,174 Diagnoses: ICD Condition Codes, Severity, Treatment Types)
+  - `STG_EHP__BILL` (917,331 Billing Records: Amounts, Coverage, Payment Status)
+  - `STG_EHP__INSR` (Insurance Policies: HMO, PPO, Providers)
+- **Preserved continuous vitals & conditions:** Systolic and diastolic blood pressure, BMI, blood glucose, cholesterol, heart rate, heart disease, diabetes, hypertension, cancer, asthma, kidney disease, and stroke.
 
-Repository: **[https://github.com/AbhiramKorupalli28/healthcare.git](https://github.com/AbhiramKorupalli28/healthcare.git)**
+## Technologies Used
+- Python 3.11
+- OpenJDK 17 (Eclipse Temurin)
+- Apache Hadoop 3.3.6 (HDFS distributed storage & WebHDFS REST API)
+- Apache Spark 3.5.3 (PySpark local cluster mode, all CPU cores)
+- Spark SQL (in-memory temporary views & distributed aggregations)
+- scikit-learn 1.9.1 (DecisionTreeClassifier, RandomForestClassifier, KMeans)
+- Streamlit 1.67.0 & Plotly (Interactive multi-page web dashboard)
 
-Every number in this README and in the dashboard comes from actual runs on the datasets. Run outputs are recorded in `output/run_results_local.json` and `output/run_results_hdfs.json`.
-
----
-
-## 1. Problem Statement
-
-Modern health records describe vast patient populations across multi-table clinical hospital systems and public surveys. However, actionable patterns—such as multimorbidity, condition prevalence across age groups, length of hospital stays, and high-risk patient trajectories—remain buried in datasets too large for standard spreadsheets or single-threaded tools. 
-
-This project demonstrates how to store, clean, join, query, and model large-scale healthcare data (1M+ to 1.6M+ records, 1–2+ GB in-memory distributed processing) reliably using distributed computing (PySpark, Spark SQL, Hadoop HDFS) and serve insights through an intuitive web interface.
-
-## 2. Objectives
-
-1. **Distributed Storage:** Ingest and manage multi-hundred-megabyte to multi-gigabyte healthcare files in distributed storage (Hadoop HDFS with WebHDFS REST API and local fallback).
-2. **Distributed Data Pipeline:** Clean, deduplicate, validate, and convert raw CSV data into partitioned columnar Parquet with PySpark, tracking full before/after reconciliation stats.
-3. **Clinical & Epidemiological SQL Analytics:** Execute 9 Spark SQL queries analyzing disease counts, age/gender distributions, clinical vitals (BMI, blood pressure, glucose), and missing value profiles.
-4. **Machine Learning at Scale:** Train and evaluate classification models (Decision Trees, Random Forests) and unsupervised K-Means clustering with leakage prevention and balanced class weights.
-5. **Interactive Dashboard & Multi-Dataset Support:** Present live metrics, interactive Plotly visualizations, dataset upload capabilities (up to 4 GB), and downloadable reports via Streamlit.
-
-## 3. Technologies
-
-| Area | Technology | Version / Details |
-|---|---|---|
-| **Language** | Python | 3.11.x (tested on Windows 11 & Linux) |
-| **Java Runtime** | OpenJDK | Eclipse Temurin 17.0.21+9 |
-| **Distributed Processing** | Apache Spark | 3.5.3 via PySpark (local mode `local[*]`, all CPU cores) |
-| **Distributed Storage** | Hadoop HDFS | 3.3.6 (single-node pseudo-distributed cluster + winutils) |
-| **Analytical Engine** | Spark SQL | Temporary in-memory views with ANSI SQL compliance |
-| **Machine Learning** | scikit-learn | 1.9.1 (DecisionTreeClassifier, RandomForestClassifier, KMeans) |
-| **Visualizations** | Plotly & Matplotlib | Interactive dark-themed charts and visual report exports |
-| **Web Dashboard** | Streamlit | 1.67.0 with custom multi-page routing and CSS styling |
-| **Storage Formats** | CSV & Parquet | Input CSVs, partitioned Snappy-compressed Parquet |
-| **Testing** | pytest | 9.2.0 (23 unit and integration tests) |
-
----
-
-## 4. System Architecture
+## Project Structure
 
 ```
-                      DATA SOURCES
-   ┌───────────────────────────────────┐    ┌──────────────────────────────────┐
-   │ CDC BRFSS Multi-Year Survey Files │    │  Kaggle 20-Table Hospital System │
-   │ (2021-2023, 1.31M records, 821 MB)│    │ (Patients, Visits, Diag, Billing)│
-   └─────────────────┬─────────────────┘    └─────────────────┬────────────────┘
-                     │                                        │
-           scripts/build_dataset.py             scripts/build_kaggle_master_dataset.py
-                     │                                        │
-                     ▼                                        ▼
-   dataset/brfss_2021_2023_combined.csv         dataset/kaggle_hospital_master_1_6m.csv
-                                                             (1.602M rows, 32 cols)
-                                         │
-                   upload to HDFS  (src/hdfs_manager.py, WebHDFS REST)
-                                         │
-                    ┌────────────────────┴────────────────────┐
-                    ▼                                         ▼
-            HDFS /healthcare/input/                 Local Storage Fallback
-                    │                                         │
-                    └────────────────────┬────────────────────┘
-                                         ▼
-                                PYSPARK PIPELINE
-                ┌─────────────────────────────────────────────┐
-                │ 1. Schema inference & snake_case conversion │
-                │ 2. Deduplication & data profiling           │
-                │ 3. Validity range enforcement               │
-                │ 4. Derived clinical metrics & age groupings │
-                └──────────────────────┬──────────────────────┘
-                                       │
-            ┌──────────────────────────┴──────────────────────────┐
-            ▼                                                     ▼
-     cleaned.parquet (Valid)                               rejected.parquet (Invalid)
-            │
-    ┌───────┴──────────────────────────┬──────────────────────────┬──────────────────────┐
-    ▼                                  ▼                          ▼                      ▼
-Spark SQL (9 Queries)         Spark Aggregations         ML Engine (50K Sample)    Dashboard
-src/sql_analytics.py          src/analytics.py           scikit-learn Random Forest  Streamlit App
-output/summaries/*.csv        Overview & Disease Views   Decision Tree & K-Means   http://localhost:8501
+Healthcare-BigData/
+├── data/       # Dataset information and sample records
+│   └── samples/
+│       └── sample_records.csv
+├── docs/       # Project methodology and screenshot assets
+│   ├── methodology.md
+│   └── screenshots/
+│       ├── dashboard_overview.png
+│       ├── disease_analytics.png
+│       ├── evaluation_results.png
+│       └── spark_processing.png
+├── pages/      # Streamlit multi-page dashboard
+│   ├── overview.py
+│   ├── dataset_explorer.py
+│   ├── disease_analytics.py
+│   ├── risk_analysis.py
+│   ├── bigdata_processing.py
+│   └── reports.py
+├── reports/    # Final project report and documentation
+│   └── final_report.md
+├── results/    # Spark SQL analytical outputs and query results
+│   ├── 1_total_records.csv
+│   ├── 2_disease_counts.csv
+│   ├── 3_age_group_distribution.csv
+│   ├── 4_gender_distribution.csv
+│   ├── 5_avg_bmi_by_disease.csv
+│   ├── 6_avg_glucose_by_disease.csv
+│   ├── 7_blood_pressure.csv
+│   ├── 8_missing_values.csv
+│   └── 9_risk_category.csv
+├── scripts/    # Multi-threaded download and PySpark join scripts
+│   ├── build_dataset.py
+│   ├── build_kaggle_master_dataset.py
+│   └── download_kaggle_clinical.py
+├── src/        # Python data processing scripts and PySpark engines
+│   ├── analytics.py
+│   ├── app_state.py
+│   ├── codebook.py
+│   ├── data_loader.py
+│   ├── hdfs_manager.py
+│   ├── logger.py
+│   ├── ml_engine.py
+│   ├── pipeline.py
+│   ├── preprocessing.py
+│   ├── spark_engine.py
+│   ├── sql_analytics.py
+│   ├── ui.py
+│   └── visualization.py
+├── tests/      # Automated pytest suite
+├── app.py      # Streamlit entry point
+├── config.py   # Application configuration
+├── requirements.txt
+├── run_analysis.py
+└── README.md   # Project overview, results, and instructions
 ```
 
----
+## Main Steps Followed
+1. Inspected multi-table Kaggle database schemas and CDC survey codebooks, detecting column roles automatically.
+2. Downloaded core clinical and patient tables concurrently using the Kaggle API.
+3. Executed distributed PySpark joins merging patients, visits, diagnoses, billing, and insurance into a unified master dataset.
+4. Cleaned and profiled data using PySpark (deduplication, type conversion, range validation, and derived metric calculations), saving outputs as partitioned Parquet.
+5. Ran 9 Spark SQL queries to compute chronic disease rates, age/gender distributions, and blood pressure classes (AHA 2017).
+6. Trained Decision Tree, Random Forest, and K-Means models with strict leakage control and evaluated performance metrics.
+7. Deployed the interactive Streamlit dashboard with dynamic dataset selection and up to 4 GB upload capabilities.
 
-## 5. Datasets Supported
+## Algorithms Used
+- **Random Forest Classifier:** Ensemble classification of 200 trees with balanced class weighting to handle disease class imbalances.
+- **Decision Tree Classifier:** Tree classification with maximum depth of 6 for baseline comparison and interpretability.
+- **K-Means Clustering:** Unsupervised patient clustering ($k=3$) over continuous physiological metrics (Age, BMI, Glucose, Blood Pressure).
 
-The project includes built-in support for two massive healthcare datasets:
+## Results Summary
 
-### A. Kaggle Enterprise Hospital Multi-Table System (Recommended)
-- **Source:** [Kaggle Healthcare Dataset (20 Tables)](https://www.kaggle.com/datasets/moid1234/health-care-data-set-20-tables)
-- **Integration Script:** [`scripts/build_kaggle_master_dataset.py`](scripts/build_kaggle_master_dataset.py)
-- **Tables Integrated:**
-  - `STG_EHP__PATN.csv`: 351,765 Patients (Demographics, Age, Gender, Blood Type, Marital Status)
-  - `STG_EHP__VIST.csv`: 917,331 Admissions (Admission/Discharge, Length of Stay, Visit Type, Room)
-  - `STG_EHP__DIAG_1.csv` & `2.csv`: 1,602,174 Clinical Diagnoses & ICD descriptions
-  - `STG_EHP__BILL.csv`: 917,331 Billing records and payment status
-  - `STG_EHP__INSR.csv`: Insurance providers and policy coverage
-- **Master Output File:** `dataset/kaggle_hospital_master_1_6m.csv`
-  - **1,602,174 rows × 32 columns** (~405 MB on disk, **>1.5 GB in-memory Spark execution**).
+| Target Condition | Majority Baseline | Decision Tree Accuracy | Decision Tree Macro F1 | Random Forest Accuracy | Random Forest Precision | Random Forest Recall | Random Forest Macro F1 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Heart Disease** | 94.98% | 89.98% | 0.7202 | **96.92%** | 0.9692 | 0.9692 | **0.8444** |
+| **Diabetes** | 94.96% | 49.53% | 0.4033 | **92.28%** | 0.9228 | 0.9228 | **0.6620** |
+| **Hypertension** | 83.18% | 77.45% | 0.7200 | **89.72%** | 0.8972 | 0.8972 | **0.8290** |
+| **Risk Category** | 98.60% | 10.46% | 0.0731 | **51.88%** | 0.9856 | 0.5188 | 0.2396 |
 
-### B. CDC BRFSS Population Survey
-- **Source:** US Centers for Disease Control and Prevention (CDC BRFSS annual files 2021, 2022, 2023).
-- **Integration Script:** [`scripts/build_dataset.py`](scripts/build_dataset.py)
-- **Master Output File:** `dataset/brfss_2021_2023_combined.csv`
-  - **1,317,148 rows × 194 columns** (821.08 MB).
+**Evaluation Highlights:**
+- **Random Forest** achieved the highest performance across all diagnostic targets, reaching **96.92% accuracy** (Macro F1: 0.8444) for Heart Disease and **92.28% accuracy** (Macro F1: 0.6620) for Diabetes.
+- The majority baseline represents the accuracy of always predicting the negative class due to severe clinical imbalance. Random Forest successfully learned minority class indicators while preserving high precision and recall.
+- In **K-Means clustering** ($k=3$), distinct patient cohorts emerged separating low-risk normotensive patients from chronic multimorbid patients requiring surgical intervention.
 
----
+## Project Documentation
+- [Final Project Report](reports/final_report.md) — Comprehensive final report covering data preprocessing, PySpark ETL, Spark SQL queries, and machine learning evaluations.
+- [Methodology](docs/methodology.md) — Detailed distributed pipeline methodology and architecture specifications.
 
-## 6. Installation & Quickstart
+## Screenshots
 
-### Prerequisites
-- **Python 3.11**
-- **Java 17 (OpenJDK / Eclipse Temurin)**
-- Windows only: Hadoop 3.3.6 `winutils.exe` and `hadoop.dll`
+### Interactive Dashboard Overview
+![Dashboard Overview](docs/screenshots/dashboard_overview.png)  
+*Overview page displaying 1.6M+ validated patient records, disease distribution, and risk cohorts.*
 
-### Step 1: Clone Repository
-```bash
-git clone https://github.com/AbhiramKorupalli28/healthcare.git
-cd healthcare
-```
+### Disease Analytics
+![Disease Analytics](docs/screenshots/disease_analytics.png)  
+*Prevalence analysis and slice-and-dice filtering across gender, age groups, and chronic conditions.*
 
-### Step 2: Set Up Virtual Environment
-```bash
-# Windows
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
+### Model Evaluation Results
+![Evaluation Results](docs/screenshots/evaluation_results.png)  
+*Performance comparison between Random Forest and Decision Tree classifiers.*
 
-# Linux / macOS
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+### Big Data & Spark Processing
+![Spark Processing](docs/screenshots/spark_processing.png)  
+*PySpark cleaning telemetry, execution timings, and HDFS cluster storage status.*
 
-### Step 3: Run PySpark Big Data Pipeline
-Run the distributed pipeline from the command line:
+## How to Run the Project
 
-```bash
-# Analyze the 1.6M Kaggle Hospital master dataset
-python run_analysis.py --dataset dataset/kaggle_hospital_master_1_6m.csv --force
+> **Notes:**
+> - Python 3.11 and Java 17 must be installed.
+> - The application automatically uses local fallback storage when Hadoop HDFS is not running.
 
-# Or run with HDFS distributed storage enabled
-python run_analysis.py --dataset dataset/kaggle_hospital_master_1_6m.csv --hdfs
-```
+1. Set up the virtual environment:
+   ```bash
+   python -m venv .venv
+   # Windows:
+   .venv\Scripts\activate
+   # Linux / macOS:
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
 
-### Step 4: Launch Interactive Streamlit Dashboard
-```bash
-streamlit run app.py
-```
-Open **`http://localhost:8501`** in your browser.
+2. Generate the master dataset (if not already downloaded):
+   ```bash
+   python scripts/download_kaggle_clinical.py
+   python scripts/build_kaggle_master_dataset.py
+   ```
 
----
+3. Run the PySpark cleaning and analytics pipeline:
+   ```bash
+   python run_analysis.py --dataset dataset/kaggle_hospital_master_1_6m.csv --force
+   ```
 
-## 7. Machine Learning Performance
+4. Launch the Streamlit dashboard:
+   ```bash
+   streamlit run app.py
+   ```
+   Open **`http://localhost:8501`** in your browser.
 
-Machine learning models are trained on representative stratified samples drawn directly from the cleaned Spark partitions. All pipelines use strict feature leakage control (e.g. outcome flags and derived categories are excluded from predictors) and stratified cross-validation.
-
-### Kaggle Hospital Dataset (1.6M Records):
-| Target Condition | Majority Baseline | Decision Tree Accuracy | Random Forest Accuracy | Random Forest Macro F1 |
-|---|---|---|---|---|
-| **Heart Disease** | 94.98% | 89.98% | **96.92%** | **0.8444** |
-| **Diabetes** | 94.96% | 49.53% | **92.28%** | **0.6620** |
-| **Hypertension** | 83.18% | 77.45% | **89.72%** | **0.8290** |
-| **Risk Category** | 98.60% | 10.46% | **51.88%** | 0.2396 |
-
-### CDC BRFSS Dataset (1.31M Records):
-| Target Condition | Majority Baseline | Decision Tree Accuracy | Random Forest Accuracy | Random Forest Macro F1 |
-|---|---|---|---|---|
-| **Heart Disease** | 94.50% | 78.50% | **93.35%** | **0.6892** |
-| **Diabetes** | 85.39% | 70.30% | **79.39%** | **0.6161** |
-| **Risk Category** | 35.37% | 37.46% | **39.28%** | **0.3159** |
-
----
-
-## 8. Spark SQL Analytics (9 Queries)
-
-All 9 queries run in parallel over the in-memory temporary view `healthcare_patients`:
-
-1. `1_total_records.csv`: Total valid record counts after distributed deduplication.
-2. `2_disease_counts.csv`: Condition-wise positive vs. total patient frequency.
-3. `3_age_group_distribution.csv`: Disease prevalence across age groups (18–29, 30–39, 40–49, 50–59, 60–69, 70+).
-4. `4_gender_distribution.csv`: Prevalence breakdown across Male, Female, and Other.
-5. `5_avg_bmi_by_disease.csv`: Average BMI stratified by disease status.
-6. `6_avg_glucose_by_disease.csv`: Average blood glucose levels stratified by condition.
-7. `7_blood_pressure.csv`: Blood pressure categorization according to AHA 2017 clinical standards (Normal, Elevated, Stage 1 HTN, Stage 2 HTN).
-8. `8_missing_values.csv`: Columnar missingness audit and null percentages across all attributes.
-9. `9_risk_category.csv`: Population distribution across High, Moderate, and Low risk cohorts.
-
-All query results are automatically exported to [`output/summaries/`](output/summaries/).
-
----
-
-## 9. Streamlit Dashboard Features
-
-- **Dynamic Dataset Switcher:** Instantly toggle between `kaggle_hospital_master_1_6m.csv`, `brfss_2021_2023_combined.csv`, or uploaded custom CSVs directly from the sidebar.
-- **Large Dataset Uploads:** Supports drag-and-drop file uploads up to **4 GB** (`maxUploadSize = 4096` in `.streamlit/config.toml`).
-- **Real-Time Visualizations:** High-performance Plotly charts rendered in an accessible dark medical theme.
-- **Risk Prediction Form:** Interactive form to test individual risk scores and multi-disease probabilities on trained Random Forest classifiers.
-- **HDFS Manager:** WebHDFS interface to inspect cluster health, browse `/healthcare/input` and `/healthcare/processed`, and trigger distributed file moves.
-- **Report Generator:** One-click download of all Spark SQL CSVs and summary reports.
-
----
-
-## 10. Automated Tests
-
-The test suite validates data ingestion, cleaning logic, Spark SQL aggregations, and ML model outputs against real records:
-
-```bash
-pytest -q tests
-```
-**Results:** `22 passed, 1 skipped (HDFS cluster test)` in ~45 seconds.
-
----
-
-## 11. Project Directory Structure
-
-```
-healthcare/
-├── .streamlit/
-│   └── config.toml                  # Streamlit port, dark theme & 4GB upload settings
-├── pages/
-│   ├── overview.py                  # Population overview & KPI metric cards
-│   ├── dataset_explorer.py          # 100-row preview, Spark schema & null profiling
-│   ├── disease_analytics.py         # Multi-condition filters & prevalence charts
-│   ├── risk_analysis.py             # ML model evaluations & interactive risk predictor
-│   ├── bigdata_processing.py        # HDFS & PySpark job telemetry & logs
-│   └── reports.py                   # One-click report and CSV downloads
-├── scripts/
-│   ├── build_dataset.py             # CDC BRFSS multi-year ETL compiler
-│   ├── build_kaggle_master_dataset.py# Distributed PySpark join for Kaggle hospital tables
-│   └── download_kaggle_clinical.py  # Multi-threaded Kaggle API dataset downloader
-├── src/
-│   ├── analytics.py                 # Spark aggregation helper routines
-│   ├── app_state.py                 # Session state & cached Spark sessions
-│   ├── codebook.py                  # Epidemiological dictionary & CDC decoders
-│   ├── data_loader.py               # Dynamic schema & role discovery
-│   ├── hdfs_manager.py              # WebHDFS client with local storage fallback
-│   ├── logger.py                    # Structured logging to output/logs/
-│   ├── ml_engine.py                 # Scikit-learn Random Forest, Decision Tree & K-Means
-│   ├── pipeline.py                  # End-to-end distributed cleaning pipeline
-│   ├── preprocessing.py             # Deduplication, type casting & range validation
-│   ├── spark_engine.py              # PySpark session management & Parquet reader
-│   ├── sql_analytics.py             # The 9 Spark SQL queries
-│   ├── ui.py                        # CSS styling & responsive metric components
-│   └── visualization.py             # Dark-themed Plotly charts
-├── tests/
-│   ├── fixtures/sample_2000_rows.csv# Test fixture from real records
-│   ├── test_data_loader.py
-│   ├── test_hdfs_manager.py
-│   ├── test_pipeline.py
-│   ├── test_preprocessing.py
-│   └── test_spark_sql_ml.py
-├── app.py                           # Main Streamlit application entry point
-├── config.py                        # Project configurations, column aliases & thresholds
-├── requirements.txt                 # Pinned dependencies
-├── run_analysis.py                  # Command-line analytics execution script
-├── .gitignore                       # Clean Git configuration
-└── README.md                        # Documentation
-```
-
----
-
-## 12. Author & License
-
-- **Author:** Abhiram Korupalli
-- **Course / Mini Project:** B.Tech Big Data Analytics (Roll: A23126552281)
-- **GitHub:** [https://github.com/AbhiramKorupalli28/healthcare.git](https://github.com/AbhiramKorupalli28/healthcare.git)
-- **License:** MIT License
+5. Run automated tests:
+   ```bash
+   pytest -q tests
+   ```

@@ -11,18 +11,13 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Large datasets (>100MB violates GitHub limits)
-dataset/kaggle_tables/
-dataset/kaggle_erd/
-dataset/kaggle_hospital_master_*.csv
-dataset/uploads/
-dataset/temp_*
+# Datasets and raw binary dumps
+dataset/
 *.zip
 *.tar.gz
 
-# Spark intermediate & cleaned outputs
-output/cleaned/
-output/logs/
+# Local output directories (results are published in results/)
+output/
 
 # OS / Editor files
 .DS_Store
