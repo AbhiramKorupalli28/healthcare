@@ -38,13 +38,6 @@ Healthcare-BigData/
 │       ├── disease_analytics.png
 │       ├── evaluation_results.png
 │       └── spark_processing.png
-├── pages/      # Streamlit multi-page dashboard
-│   ├── overview.py
-│   ├── dataset_explorer.py
-│   ├── disease_analytics.py
-│   ├── risk_analysis.py
-│   ├── bigdata_processing.py
-│   └── reports.py
 ├── reports/    # Final project report and documentation
 │   └── final_report.md
 ├── results/    # Spark SQL analytical outputs and query results
@@ -57,29 +50,28 @@ Healthcare-BigData/
 │   ├── 7_blood_pressure.csv
 │   ├── 8_missing_values.csv
 │   └── 9_risk_category.csv
-├── scripts/    # Multi-threaded download and PySpark join scripts
-│   ├── build_dataset.py
-│   ├── build_kaggle_master_dataset.py
-│   └── download_kaggle_clinical.py
 ├── src/        # Python data processing scripts and PySpark engines
 │   ├── analytics.py
 │   ├── app_state.py
 │   ├── codebook.py
+│   ├── config.py
 │   ├── data_loader.py
 │   ├── hdfs_manager.py
 │   ├── logger.py
 │   ├── ml_engine.py
 │   ├── pipeline.py
 │   ├── preprocessing.py
+│   ├── run_analysis.py
 │   ├── spark_engine.py
 │   ├── sql_analytics.py
 │   ├── ui.py
-│   └── visualization.py
-├── tests/      # Automated pytest suite
-├── app.py      # Streamlit entry point
-├── config.py   # Application configuration
+│   ├── visualization.py
+│   └── scripts/
+│       ├── build_dataset.py
+│       ├── build_kaggle_master_dataset.py
+│       └── download_kaggle_clinical.py
 ├── requirements.txt
-├── run_analysis.py
+├── .gitignore
 └── README.md   # Project overview, results, and instructions
 ```
 
@@ -90,7 +82,7 @@ Healthcare-BigData/
 4. Cleaned and profiled data using PySpark (deduplication, type conversion, range validation, and derived metric calculations), saving outputs as partitioned Parquet.
 5. Ran 9 Spark SQL queries to compute chronic disease rates, age/gender distributions, and blood pressure classes (AHA 2017).
 6. Trained Decision Tree, Random Forest, and K-Means models with strict leakage control and evaluated performance metrics.
-7. Deployed the interactive Streamlit dashboard with dynamic dataset selection and up to 4 GB upload capabilities.
+7. Evaluated cluster sizes, runtimes, and model metrics across all chronic conditions.
 
 ## Algorithms Used
 - **Random Forest Classifier:** Ensemble classification of 200 trees with balanced class weighting to handle disease class imbalances.
@@ -151,22 +143,11 @@ Healthcare-BigData/
 
 2. Generate the master dataset (if not already downloaded):
    ```bash
-   python scripts/download_kaggle_clinical.py
-   python scripts/build_kaggle_master_dataset.py
+   python src/scripts/download_kaggle_clinical.py
+   python src/scripts/build_kaggle_master_dataset.py
    ```
 
 3. Run the PySpark cleaning and analytics pipeline:
    ```bash
-   python run_analysis.py --dataset dataset/kaggle_hospital_master_1_6m.csv --force
-   ```
-
-4. Launch the Streamlit dashboard:
-   ```bash
-   streamlit run app.py
-   ```
-   Open **`http://localhost:8501`** in your browser.
-
-5. Run automated tests:
-   ```bash
-   pytest -q tests
+   python src/run_analysis.py --dataset dataset/kaggle_hospital_master_1_6m.csv --force
    ```

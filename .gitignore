@@ -1,3 +1,21 @@
+# Streamlit & UI (kept locally, excluded from GitHub)
+.streamlit/
+pages/
+app.py
+
+# Tests (kept locally, excluded from GitHub)
+tests/
+
+# Root runner & config (tracked inside src/)
+/run_analysis.py
+/config.py
+/scripts/
+
+# Legacy report files
+reports/HEALTHCARE_ANALYTICS_REPORT.md
+reports/*.png
+reports/screenshots/
+
 # Virtual environment
 .venv/
 venv/
@@ -16,7 +34,7 @@ dataset/
 *.zip
 *.tar.gz
 
-# Local output directories (results are published in results/)
+# Local output directories
 output/
 
 # OS / Editor files

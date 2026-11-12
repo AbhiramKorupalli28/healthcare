@@ -1,16 +1,15 @@
 """Command-line run of the whole analysis (no dashboard needed).
-
-  python run_analysis.py                       # local storage, default dataset
-  python run_analysis.py --hdfs                # read from and write to HDFS (see README)
-  python run_analysis.py --dataset path.csv    # any other CSV
-
-It prints the results and writes output/run_results_<local|hdfs>.json, which is where every
-number in the README and the report comes from.
 """
 import argparse
 import json
+import sys
 import time
 from pathlib import Path
+
+# Add project root and src to path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 import pandas as pd
 
