@@ -378,6 +378,15 @@ def metric_card(label: str, value: str, sub: str = "") -> None:
         if sub:
             st.caption(sub)
 
+def storage_badge(mode: str) -> str:
+    cls = "stat-badge-green" if mode == "HDFS" else "stat-badge-dark"
+    return f"<span class='{cls}'>{mode}</span>"
+
+def source_note() -> None:
+    st.markdown("<div class='summary-box'><b>Source:</b> " + DATASET_INFO["name"] + " (" + DATASET_INFO["author"] +
+                "). Population health records processed with Apache Spark & PySpark.</div>",
+                unsafe_allow_html=True)
+
 def note(text: str) -> None:
     st.markdown(f"<div class='summary-box'>{text}</div>", unsafe_allow_html=True)
 
