@@ -109,11 +109,7 @@ def train_classifiers(pdf: pd.DataFrame, target: str, num: list, cat: list, *,
     if len(data) > max_rows:
         data = data.sample(max_rows, random_state=seed)
     X = data[num + cat]
-    y_raw = data[target]
-    if set(y_raw.dropna().unique()).issubset({0, 1, "0", "1", 0.0, 1.0}):
-        y = y_raw.replace({0: "No", 1: "Yes", "0": "No", "1": "Yes", 0.0: "No", 1.0: "Yes"}).astype(str)
-    else:
-        y = y_raw.astype(str)
+    y = data[target].astype(str)
     labels = sorted(y.unique())
     X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=test_size, stratify=y, random_state=seed)
     models = {

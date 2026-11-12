@@ -1,5 +1,5 @@
 bp_category,patients,avg_systolic,avg_diastolic
-Stage 1 hypertension,376630,133.5,80.8
-Stage 2 hypertension,339719,150.1,86.1
-Elevated,220008,127.2,77.8
-Normal,5422,117.2,75.5
+Stage 1 hypertension,680463,128.3,82.7
+Elevated,340624,124.1,77.1
+Normal,300242,115.6,76.2
+Stage 2 hypertension,279999,152.4,93.1

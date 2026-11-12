@@ -1,4 +1,4 @@
-gender,patients,diabetes_pct,hypertension_pct,high_cholesterol_pct,heart_disease_pct,heart_attack_pct,stroke_pct,asthma_pct,kidney_disease_pct,copd_pct,cancer_pct
-Female,315810,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
-Male,313534,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
-Other,312435,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+gender,patients,diabetes_pct,hypertension_pct,heart_disease_pct,stroke_pct,asthma_pct,kidney_disease_pct,cancer_pct
+Female,537624,5.04,16.87,5.03,2.50,2.52,2.51,2.54
+Male,532181,5.03,16.83,5.00,2.49,2.45,2.48,2.51
+Other,531523,5.05,16.79,5.02,2.49,2.50,2.49,2.48

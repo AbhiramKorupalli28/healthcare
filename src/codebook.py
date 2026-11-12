@@ -44,23 +44,24 @@ def apply_codebook(df: DataFrame) -> tuple[DataFrame, dict]:
     """Rename, label and clean the CDC variables that are present. Returns (df, what_changed)."""
     changed = {"renamed": [], "labelled": [], "scaled": [], "special": []}
     cols = set(df.columns)
+
+    # Only apply CDC BRFSS codebook transformations if raw CDC survey columns are present
+    is_brfss = any(c in RENAME for c in cols)
+    if not is_brfss:
+        return df, changed
+
     for old, new in RENAME.items():
         if old in cols and new not in cols:
             df = df.withColumnRenamed(old, new)
             cols.discard(old)
             cols.add(new)
             changed["renamed"].append(f"{old}->{new}")
-
-    # If no CDC survey variables were found, this is an already-formatted or non-CDC dataset.
-    # Pass through untouched so normal values (string genders, real BMI, 0/1 flags) are preserved.
-    if not changed["renamed"]:
-        return df, changed
     for name, mapping in CODE_MAPS.items():
         if name in cols:
             pairs = [x for k, v in mapping.items() for x in (F.lit(k), F.lit(v))]
             df = df.withColumn(name, F.create_map(*pairs)[F.col(name).cast("int")])
             changed["labelled"].append(name)
-    if "bmi" in cols:
+    if "bmi" in cols and ("_BMI5" in changed["renamed"]):
         # BRFSS stores BMI with two implied decimals (2700 = 27.00)
         df = df.withColumn("bmi", F.col("bmi").cast("double") / 100.0)
         changed["scaled"].append("bmi / 100")

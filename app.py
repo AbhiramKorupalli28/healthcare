@@ -23,22 +23,20 @@ pages = [
 
 with st.sidebar:
     st.markdown("### 🩺 Healthcare Analytics")
-    active = active_dataset_path()
-    datasets = list_local_datasets()
-    if len(datasets) > 1:
-        names = [d.name for d in datasets]
-        idx = names.index(active.name) if active.name in names else 0
-        selected = st.selectbox("Select dataset", names, index=idx)
-        if selected != active.name:
-            chosen = next(d for d in datasets if d.name == selected)
-            set_active_dataset(chosen)
+    available = list_local_datasets()
+    if available:
+        names = [d.name for d in available]
+        current = active_dataset_path().name
+        idx = names.index(current) if current in names else 0
+        chosen = st.selectbox("📂 Active Dataset", names, index=idx)
+        chosen_path = available[names.index(chosen)]
+        if str(chosen_path) != str(active_dataset_path()):
+            set_active_dataset(chosen_path)
             st.rerun()
-    else:
-        st.caption("Active dataset")
-        st.markdown(f"**{active.name}**")
+
+    active = active_dataset_path()
     if active.exists():
-        st.caption(f"{active.stat().st_size / 1e6:.2f} MB · loaded from local disk")
-    st.caption("CDC BRFSS survey analysis")
+        st.caption(f"{active.stat().st_size / 1e6:.2f} MB · loaded from disk")
     st.divider()
 
 navigation = st.navigation(pages)

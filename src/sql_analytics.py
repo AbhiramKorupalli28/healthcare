@@ -113,14 +113,14 @@ class SparkSQLAnalytics:
 
     def _missing_long(self, wide) -> "pandas.DataFrame":
         import pandas as pd
-        if wide.empty or pd.isna(wide["total_rows"].iloc[0]):
-            total = 0
-        else:
-            total = int(wide["total_rows"].iloc[0])
+        if wide.empty:
+            return pd.DataFrame(columns=["column_name", "missing", "total", "missing_pct"])
+        total_val = wide["total_rows"].iloc[0]
+        total = int(total_val) if pd.notna(total_val) else 0
         rows = []
         for i, c in enumerate(self.df.columns):
-            val = wide[f"m_{i}"].iloc[0] if f"m_{i}" in wide.columns else 0
-            miss = int(val) if pd.notna(val) else 0
+            m_val = wide[f"m_{i}"].iloc[0] if f"m_{i}" in wide.columns else 0
+            miss = int(m_val) if pd.notna(m_val) else 0
             rows.append({"column_name": c, "missing": miss, "total": total,
                          "missing_pct": round(100.0 * miss / total, 2) if total else 0.0})
         return pd.DataFrame(rows)

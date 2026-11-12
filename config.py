@@ -40,11 +40,7 @@ LOG_DIR = OUTPUT_DIR / "logs"
 REPORTS_DIR = PROJECT_ROOT / "reports"                # visual report PNGs
 
 # The dataset of record: CDC BRFSS annual files 2021-2023 (built by scripts/build_dataset.py)
-DEFAULT_DATASET = (
-    DATASET_DIR / "kaggle_hospital_dataset.csv"
-    if (DATASET_DIR / "kaggle_hospital_dataset.csv").exists()
-    else DATASET_DIR / "brfss_2021_2023_combined.csv"
-)
+DEFAULT_DATASET = DATASET_DIR / "brfss_2021_2023_combined.csv"
 DATASET_INFO = {
     "name": "CDC BRFSS 2021-2023 combined (shared variables)",
     "source_url": "https://www.cdc.gov/brfss/annual_data/annual_2022.html",
@@ -137,7 +133,7 @@ LEAKAGE_NAME_HINTS = ["recommendation", "consultation", "risk_score", "risk_cate
 
 # Plausible physiological / survey ranges; a value outside its range marks the record invalid.
 VALID_RANGES = {
-    "age": (18, 120), "bmi": (10, 100), "glucose": (20, 600), "hba1c": (3, 20),
+    "age": (0, 120), "bmi": (10, 100), "glucose": (20, 600), "hba1c": (3, 20),
     "bp_systolic": (50, 260), "bp_diastolic": (30, 200), "cholesterol": (50, 600),
     "heart_rate": (20, 250), "physical_health_days": (0, 30), "mental_health_days": (0, 30),
     "sleep_hours": (1, 24),
