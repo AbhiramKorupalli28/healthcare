@@ -1,6 +1,6 @@
 # Healthcare Big Data Analytics Using Hadoop and Apache Spark
 
-This project uses large-scale healthcare data to study chronic disease prevalence, patient risk factors, and hospital admission patterns across populations. We used Apache Hadoop and Apache Spark (PySpark, Spark SQL) to clean, join, and analyze multi-gigabyte healthcare records, and trained Decision Tree and Random Forest classifiers alongside an interactive Streamlit web dashboard.
+This project uses large-scale healthcare data to study chronic disease prevalence, patient risk factors, and hospital admission patterns across populations. We used Apache Hadoop and Apache Spark (PySpark, Spark SQL) to clean, join, and analyze multi-gigabyte healthcare records, and trained Decision Tree and Random Forest classifiers alongside an interactive Streamlit web dashboard styled with a modern light SaaS theme and forest green accents.
 
 ## Dataset
 We used the **Health Care Data Set (20 Tables)** from Kaggle, integrated into a unified clinical master dataset, alongside the **CDC BRFSS population survey**.
@@ -22,7 +22,7 @@ We used the **Health Care Data Set (20 Tables)** from Kaggle, integrated into a 
 - Apache Spark 3.5.3 (PySpark local cluster mode, all CPU cores)
 - Spark SQL (in-memory temporary views & distributed aggregations)
 - scikit-learn 1.9.1 (DecisionTreeClassifier, RandomForestClassifier, KMeans)
-- Streamlit 1.67.0 & Plotly (Interactive multi-page web dashboard)
+- Streamlit 1.67.0 & Plotly (Interactive multi-page web dashboard, Light SaaS Theme)
 
 ## Project Structure
 
@@ -61,6 +61,7 @@ Healthcare-BigData/
 │   ├── ml_engine.py
 │   ├── pipeline.py
 │   ├── preprocessing.py
+│   ├── requirements.txt
 │   ├── run_analysis.py
 │   ├── spark_engine.py
 │   ├── sql_analytics.py
@@ -70,7 +71,6 @@ Healthcare-BigData/
 │       ├── build_dataset.py
 │       ├── build_kaggle_master_dataset.py
 │       └── download_kaggle_clinical.py
-├── requirements.txt
 ├── .gitignore
 └── README.md   # Project overview, results, and instructions
 ```
@@ -82,7 +82,7 @@ Healthcare-BigData/
 4. Cleaned and profiled data using PySpark (deduplication, type conversion, range validation, and derived metric calculations), saving outputs as partitioned Parquet.
 5. Ran 9 Spark SQL queries to compute chronic disease rates, age/gender distributions, and blood pressure classes (AHA 2017).
 6. Trained Decision Tree, Random Forest, and K-Means models with strict leakage control and evaluated performance metrics.
-7. Evaluated cluster sizes, runtimes, and model metrics across all chronic conditions.
+7. Deployed the interactive Streamlit dashboard with a modern light healthcare UI, dynamic dataset selection, and up to 4 GB upload capabilities.
 
 ## Algorithms Used
 - **Random Forest Classifier:** Ensemble classification of 200 trees with balanced class weighting to handle disease class imbalances.
@@ -111,19 +111,19 @@ Healthcare-BigData/
 
 ### Interactive Dashboard Overview
 ![Dashboard Overview](docs/screenshots/dashboard_overview.png)  
-*Overview page displaying 1.6M+ validated patient records, disease distribution, and risk cohorts.*
+*Overview page displaying 1.6M+ validated patient records, disease distribution, and risk cohorts in the new light theme.*
 
 ### Disease Analytics
 ![Disease Analytics](docs/screenshots/disease_analytics.png)  
-*Prevalence analysis and slice-and-dice filtering across gender, age groups, and chronic conditions.*
+*Prevalence analysis and slice-and-dice filtering across gender, age groups, and chronic conditions (white SaaS theme).*
 
 ### Model Evaluation Results
 ![Evaluation Results](docs/screenshots/evaluation_results.png)  
-*Performance comparison between Random Forest and Decision Tree classifiers.*
+*Performance comparison between Random Forest and Decision Tree classifiers (light theme).*
 
 ### Big Data & Spark Processing
 ![Spark Processing](docs/screenshots/spark_processing.png)  
-*PySpark cleaning telemetry, execution timings, and HDFS cluster storage status.*
+*PySpark cleaning telemetry, execution timings, and HDFS cluster storage status (white theme).*
 
 ## How to Run the Project
 
@@ -138,7 +138,7 @@ Healthcare-BigData/
    .venv\Scripts\activate
    # Linux / macOS:
    source .venv/bin/activate
-   pip install -r requirements.txt
+   pip install -r src/requirements.txt
    ```
 
 2. Generate the master dataset (if not already downloaded):
@@ -151,3 +151,9 @@ Healthcare-BigData/
    ```bash
    python src/run_analysis.py --dataset dataset/kaggle_hospital_master_1_6m.csv --force
    ```
+
+4. Launch the Streamlit dashboard:
+   ```bash
+   streamlit run app.py
+   ```
+   Open **`http://localhost:8501`** in your browser.
